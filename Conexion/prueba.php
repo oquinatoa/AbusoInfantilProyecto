@@ -13,12 +13,12 @@ and open the template in the editor.
         <?php
         include './CconexionBase.php';
         $con = new CconexionBase();
-        $con->conexion();
-        $resul=$con->consultar();
-        while ($columna = mysqli_fetch_array( $resul ))
-	{
-            echo $columna.'<br>';
-	}
+        $conexion = $con->conexion();
+        $query = 'select * from t_persona;';
+        $resultado = mysqli_query($conexion, $query);
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+            echo $fila['TE_NOMBRES'].'<br>';
+        }
         ?>
     </body>
 </html>

@@ -21,15 +21,17 @@ class CconexionBase {
     }
 
     function conexion() {
-        $this->link = mysqli_connect( 'localhost', 'oswaldo', '1234' ) or die ("No se ha podido conectar al servidor de Base de datos");
-        echo 'Connected successfully';
-        
-        $this->db=mysqli_select_db($this->link, 'abusoinfantil')or die('No se pudo seleccionar la base de datos');
+        $this->link = mysqli_connect('localhost', 'oswaldo', '1234') or die("No se ha podido conectar al servidor de Base de datos");
+
+
+        $this->db = mysqli_select_db($this->link, 'abusoinfantil')or die('No se pudo seleccionar la base de datos');
+        echo 'Connected successfully<br>';
+        return $this->link;
     }
 
     function consultar() {
         $query = 'select * from t_persona;';
-        $result=mysqli_query( $this->link, $query ) or die ( "Algo ha ido mal en la consulta a la base de datos");
+        $result = mysqli_query($this->link, $query) or die("Algo ha ido mal en la consulta a la base de datos");
         return $result;
     }
 
