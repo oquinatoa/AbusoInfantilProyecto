@@ -29,10 +29,8 @@ class CconexionBase {
         return $this->link;
     }
 
-    function consultar() {
-        $query = 'select * from t_persona;';
-        $result = mysqli_query($this->link, $query) or die("Algo ha ido mal en la consulta a la base de datos");
-        return $result;
+    function guardarBase($data,$conexion) {
+        mysqli_query($conexion, $data);
     }
 
     function cerrar() {

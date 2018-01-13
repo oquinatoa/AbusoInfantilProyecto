@@ -15,12 +15,16 @@ and open the template in the editor.
         <?php
         include './Cformulario.php';
         include './Cpreguntas.php';
+        include '../Conexion/CconexionBase.php';
+        session_start();
+        $base = new CconexionBase();
 
         $nformulario = $_POST['no'];
         $numPreguntas = $_POST['npreguntas'];
         $numRespuestas = $_POST['nrespuestas'];
 
         $formulario = new Cformulario($nformulario);
+        $query = '';
         for ($i = 1; $i <= $numPreguntas; $i++) {
             $preguntas = new Cpreguntas();
             $preguntas->setPregunta($_POST['pregunta' . $i]);
@@ -33,6 +37,7 @@ and open the template in the editor.
             }
             $formulario->setListaPreguntas($preguntas);
         }
+        $_SESSION["objeto"]=$formulario;
         ?>
         <div>
 
@@ -46,18 +51,24 @@ and open the template in the editor.
             for ($j = 0; $j < $numPreguntas; $j++) {
                 echo '<div class="form-group">';
                 $pregunas = $formulario->getListapreguntas()[$j];
-                echo  '<label>'.$pregunas->getPregunta().'</label>';
+                echo '<label>' . $pregunas->getPregunta() . '</label>';
                 echo '<div class="form-control">';
                 for ($i = 0; $i < sizeof($pregunas->getListaRespuestas()); $i++) {
-                    $num=$i+1;
-                    echo '<label>'.$num.'.-'.$pregunas->getListaRespuestas()[$i].'</label><br>'; 
+                    $num = $i + 1;
+                    echo '<label>' . $num . '.-' . $pregunas->getListaRespuestas()[$i] . '</label><br>';
                 }
                 echo '</div>';
                 echo '</div>';
             }
             ?>
-            <button class="btn btn-primary active">Guardar</button>
+            <form action="GuardarDatos.php" method="POST">
+              
+                <input type="submit" class="btn btn-primary active" value="Guardar"/>
+
+            </form>
         </div>
 
-    </body>
+
+
+    </body>        
 </html>

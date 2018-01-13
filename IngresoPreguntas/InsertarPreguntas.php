@@ -13,6 +13,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        session_start();
         $nombreformulario = $_POST['nformulario'];
         $numPreguntas = $_POST['npreguntas'];
         $numRespuestas = $_POST['nrespuestas'];
